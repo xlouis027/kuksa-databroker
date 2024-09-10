@@ -18,7 +18,7 @@ resolver = "2"
 members = [
     "databroker",
     "databroker-proto",
-    "databroker-cli",
+    #"databroker-cli",
 ]
 
 exclude = [
@@ -40,10 +40,13 @@ tonic = { version = "0.11.0", default-features = false }
 tonic-build = { version = "0.11.0", default-features = false }
 
 [profile.release]
-lto = true                 # Link time optimization (dead code removal etc...)
+lto = "thin"                 # Link time optimization (dead code removal etc...)
 opt-level = "s"
 codegen-units = 1
 incremental = false
 strip = true
+
+[patch.crates-io]
+ring = { git = "https://github.com/xlouis027/ring.git" }
 # debug = true               # for profiling (turn off otherwise)
 # split-debuginfo = "packed" # only enable when `debug = true``
